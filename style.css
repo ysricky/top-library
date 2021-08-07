@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  min-height: 100vh;
+  background-color: rgb(101, 224, 255);
+}
+
+#container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 0.2fr, 1fr, 1fr;
+  grid-template-areas:
+    'header header header'
+    '. submitBook .'
+    'booksWrapper booksWrapper booksWrapper';
+}
+
+#header {
+  grid-area: header;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#submitBook {
+  grid-area: submitBook;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#booksWrapper {
+  grid-area: booksWrapper;
+}
