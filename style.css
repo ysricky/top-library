@@ -4,12 +4,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: Poppins, sans-serif;
 }
 
 body {
-  font-family: Poppins, sans-serif;
   min-height: 100vh;
-  background-color: rgb(101, 224, 255);
+  background: linear-gradient(rgb(105, 225, 255), rgb(78, 125, 255));
 }
 
 #container {
@@ -25,7 +25,6 @@ body {
 #header {
   grid-area: header;
   text-align: center;
-  text-transform: uppercase;
 }
 
 #submitBook {
@@ -38,4 +37,54 @@ body {
 
 #booksWrapper {
   grid-area: booksWrapper;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#btnSubmit {
+  cursor: pointer;
+  margin: 15px auto;
+  height: 25px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 15px auto;
+}
+
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(130, 255, 192);
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  word-break: break-all;
+  box-shadow: 0px 10px 5px 0px rgb(0, 0, 0, 0.3);
+}
+
+.bookCard:hover {
+  transition: all 0.3s ease-out;
+  background-color: #00f0c8;
+}
+
+.buttonDiv {
+  width: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btnRead,
+.btnDel {
+  width: 50px;
 }

@@ -12,7 +12,9 @@ function Book(title, author, pages, read) {
 
 Book.prototype.info = function () {
   const hasRead = this.read ? 'has been read' : 'not read yet';
-  return `${this.title}, by ${this.author}, ${this.pages} pages, ${hasRead}.`;
+  return `${this.title.toUpperCase()}, by ${this.author}, ${
+    this.pages
+  } pages, ${hasRead}.`;
 };
 
 //create book object and append to myLibraryArray
@@ -38,14 +40,72 @@ const addNewBookToMyLibrary = () => {
 };
 
 //create and display book info
-const changeBookReadState = () => {};
-const deleteBook = () => {};
+
 const createBookElement = (bookObject) => {
   const booksWrapper = document.querySelector('#booksWrapper');
   const bookDiv = document.createElement('div');
-  bookDiv.classList.add('bookDiv');
+  const bookDelButton = document.createElement('button');
+  const bookReadButton = document.createElement('button');
+  const buttonDiv = document.createElement('div');
+  buttonDiv.classList.add('buttonDiv');
+  bookDelButton.classList.add('btnDel');
+  bookReadButton.classList.add('btnRead');
+  bookDiv.classList.add('bookCard');
   bookDiv.textContent = bookObject.info();
+  buttonDiv.appendChild(bookReadButton);
+  buttonDiv.appendChild(bookDelButton);
+  bookDiv.appendChild(buttonDiv);
   booksWrapper.appendChild(bookDiv);
+  updateBookIndex();
+  updateReadBook();
+  deleteBook();
+};
+
+const updateBookIndex = () => {
+  let bookIndex = 0;
+  const books = document.querySelectorAll('.bookCard');
+  books.forEach((book) => {
+    book.setAttribute('data-book', `${bookIndex}`);
+    bookIndex++;
+  });
+};
+
+const bookDataVal = (button) => {
+  return button.parentElement.parentElement.getAttribute('data-book');
+};
+
+const updateReadBook = () => {
+  const actionRead = document.querySelectorAll('.btnRead');
+  actionRead.forEach((button) => {
+    if (!button.textContent) {
+      button.addEventListener('click', () => {
+        const dataRead = bookDataVal(button);
+        if (myLibraryArray[dataRead]['read'] === true) {
+          myLibraryArray[dataRead]['read'] = false;
+        } else {
+          myLibraryArray[dataRead]['read'] = true;
+        }
+        button.parentElement.parentElement.firstChild.textContent =
+          myLibraryArray[dataRead].info();
+      });
+    }
+    button.textContent = 'Read';
+  });
+};
+
+const deleteBook = () => {
+  const actionDel = document.querySelectorAll('.btnDel');
+  actionDel.forEach((button) => {
+    if (!button.textContent) {
+      button.addEventListener('click', () => {
+        const dataBook = bookDataVal(button);
+        myLibraryArray.splice(dataBook, 1);
+        button.parentElement.parentElement.remove();
+        updateBookIndex();
+      });
+    }
+    button.textContent = 'Delete';
+  });
 };
 
 const displayBook = () => {
@@ -55,20 +115,34 @@ const displayBook = () => {
 };
 
 const refreshDisplay = () => {
-  const allBook = document.querySelectorAll('.bookDiv');
+  const allBook = document.querySelectorAll('.bookCard');
   allBook.forEach((book) => {
     book.remove();
   });
+};
+
+const validateForm = () => {
+  const bookNameField = document.forms['book-field']['book-name-field'].value;
+  const bookAuthorField =
+    document.forms['book-field']['book-author-field'].value;
+  const bookPageField = document.forms['book-field']['book-page-field'].value;
+  return bookNameField !== '' && bookAuthorField !== '' && bookPageField !== ''
+    ? true
+    : false;
 };
 
 const btnSubmit = document.querySelector('#btnSubmit');
 const bookForm = document.querySelector('form');
 
 btnSubmit.addEventListener('click', () => {
-  addNewBookToMyLibrary();
-  bookForm.reset();
-  refreshDisplay();
-  displayBook();
+  if (validateForm()) {
+    addNewBookToMyLibrary();
+    bookForm.reset();
+    refreshDisplay();
+    displayBook();
+  } else {
+    alert('Please fill the empty fields.');
+  }
 });
 
 displayBook();

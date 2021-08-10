@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=2">
+  <link rel="manifest" href="/favicon/site.webmanifest">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
   <title>TOP Library</title>
@@ -13,24 +16,24 @@
 <body>
   <div id="container">
     <div id="header">
-      <h1>TOP Library</h1>
+      <h1>Please fill the form to add new book:</h1>
     </div>
     <div id="submitBook">
-      <h2>Please fill the form to add new book:</h2>
-      <form id="bookForm">
+      <form id="bookForm" name="book-field">
         <label for="title">Book Title:</label><br>
-        <input type="text" id="title" class="textInput" maxlength="30"><br>
+        <input name="book-name-field" type="text" id="title" class="textInput" placeholder="Book name"
+          maxlength="30"><br>
         <label for="author">Book Author:</label><br>
-        <input type="text" id="author" class="textInput" maxlength="25"><br>
+        <input name="book-author-field" type="text" id="author" class="textInput" placeholder="Author name"
+          maxlength="25"><br>
         <label for="pages">Book Pages:</label><br>
-        <input type="tel" id="pages" class="textInput" maxlength="4"><br>
+        <input name="book-page-field" type="tel" id="pages" class="textInput" placeholder="e.g. 123" maxlength="4"><br>
         <label for="checkRead">Already read?</label>
         <input type="checkbox" id="checkRead"><br>
       </form>
-      <button id="btnSubmit">Submit</button>
+      <button id="btnSubmit">Add New Book</button>
     </div>
     <div id="booksWrapper">
-      <h2>Book List:</h2>
     </div>
   </div>
 </body>
