@@ -8,11 +8,11 @@
 }
 
 body {
-  min-height: 100vh;
   background: linear-gradient(rgb(105, 225, 255), rgb(78, 125, 255));
 }
 
 #container {
+  min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 0.2fr, 1fr, 1fr;
