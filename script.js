@@ -1,7 +1,32 @@
 'use strict';
 
 //Book Parent Object
-let myLibraryArray = [];
+let myLibraryArray = [
+  {
+    title: 'Naruto Shippuden',
+    author: 'Masashi Kishimoto',
+    pages: 120,
+    read: true,
+    info: function () {
+      const hasRead = this.read ? 'has been read' : 'not read yet';
+      return `${this.title.toUpperCase()}, by ${this.author}, ${
+        this.pages
+      } pages, ${hasRead}.`;
+    },
+  },
+  {
+    title: 'Bleach',
+    author: 'Tite Kubo',
+    pages: 100,
+    read: true,
+    info: function () {
+      const hasRead = this.read ? 'has been read' : 'not read yet';
+      return `${this.title.toUpperCase()}, by ${this.author}, ${
+        this.pages
+      } pages, ${hasRead}.`;
+    },
+  },
+];
 
 function Book(title, author, pages, read) {
   this.title = title;
