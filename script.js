@@ -17,10 +17,9 @@ class Book {
 
 //get local storage from myLibraryArray and re-convert it into new object
 const storedArray = () => JSON.parse(localStorage.getItem('array'));
-let myLibraryArray =
-  storedArray().map((obj) => {
-    return new Book(obj.title, obj.author, obj.pages, obj.read);
-  }) || [];
+let myLibraryArray = (storedArray() || []).map((obj) => {
+  return new Book(obj.title, obj.author, obj.pages, obj.read);
+});
 const saveToLocalStorage = () => {
   localStorage.setItem('array', JSON.stringify(myLibraryArray));
 };
