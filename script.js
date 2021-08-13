@@ -7,12 +7,20 @@ const saveToLocalStorage = () => {
   localStorage.setItem('array', JSON.stringify(myLibraryArray));
 };
 
-//new Book object constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+//create Book objects using ES6 class syntax
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  info() {
+    let hasRead = this.read ? 'has been read' : 'not read yet';
+    return `${this.title.toUpperCase()}, by ${this.author}, ${
+      this.pages
+    } pages, ${hasRead}.`;
+  }
 }
 
 //JSON doesn't support functions
