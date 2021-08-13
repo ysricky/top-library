@@ -1,12 +1,4 @@
 'use strict';
-//checkpoint
-//get local storage from myLibraryArray and re-assign it to myLibraryArray
-const storedArray = () => JSON.parse(localStorage.getItem('array'));
-let myLibraryArray = storedArray() || [];
-const saveToLocalStorage = () => {
-  localStorage.setItem('array', JSON.stringify(myLibraryArray));
-};
-
 //create Book objects using ES6 class syntax
 class Book {
   constructor(title, author, pages, read) {
@@ -23,12 +15,14 @@ class Book {
   }
 }
 
-//JSON doesn't support functions
-const info = function (bookObject) {
-  let hasRead = bookObject.read ? 'has been read' : 'not read yet';
-  return `${bookObject.title.toUpperCase()}, by ${bookObject.author}, ${
-    bookObject.pages
-  } pages, ${hasRead}.`;
+//get local storage from myLibraryArray and re-convert it into new object
+const storedArray = () => JSON.parse(localStorage.getItem('array'));
+let myLibraryArray =
+  storedArray().map((obj) => {
+    return new Book(obj.title, obj.author, obj.pages, obj.read);
+  }) || [];
+const saveToLocalStorage = () => {
+  localStorage.setItem('array', JSON.stringify(myLibraryArray));
 };
 
 //get book data from user inputs and assign them to inputsArray
@@ -66,7 +60,7 @@ const createBookElement = (bookObject) => {
   bookDelButton.classList.add('btnDel');
   bookReadButton.classList.add('btnRead');
   bookDiv.classList.add('bookCard');
-  bookDiv.textContent = info(bookObject);
+  bookDiv.textContent = bookObject.info();
   buttonDiv.appendChild(bookReadButton);
   buttonDiv.appendChild(bookDelButton);
   bookDiv.appendChild(buttonDiv);
@@ -103,9 +97,8 @@ const updateReadBook = () => {
         } else {
           myLibraryArray[dataRead]['read'] = true;
         }
-        button.parentElement.parentElement.firstChild.textContent = info(
-          myLibraryArray[dataRead]
-        );
+        button.parentElement.parentElement.firstChild.textContent =
+          myLibraryArray[dataRead].info();
       });
     }
     button.textContent = 'Read';
