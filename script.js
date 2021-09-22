@@ -9,17 +9,19 @@ class Book {
   }
   info() {
     let hasRead = this.read ? 'has been read' : 'not read yet';
-    return `${this.title}, by ${this.author}, ${this.pages} pages, ${hasRead}.`;
+    return `${this.title.toUppercase()}, by ${this.author}, ${
+      this.pages
+    } pages, ${hasRead}.`;
   }
 }
 
 //get local storage from myLibraryArray and re-convert it into new object
-const storedArray = () => JSON.parse(localStorage.getItem('array'));
+const storedArray = () => JSON.parse(localStorage.getItem('bookListStorage'));
 let myLibraryArray = (storedArray() || []).map((obj) => {
   return new Book(obj.title, obj.author, obj.pages, obj.read);
 });
 const saveToLocalStorage = () => {
-  localStorage.setItem('array', JSON.stringify(myLibraryArray));
+  localStorage.setItem('bookListStorage', JSON.stringify(myLibraryArray));
 };
 
 //get book data from user inputs and assign them to inputsArray
