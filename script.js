@@ -9,21 +9,15 @@ class Book {
   }
   info() {
     let hasRead = this.read ? 'has been read' : 'not read yet';
-    return `${this.title.toUpperCase()}, by ${this.author}, ${
-      this.pages
-    } pages, ${hasRead}.`;
+    return `${this.title}, by ${this.author}, ${this.pages} pages, ${hasRead}.`;
   }
 }
 
 //get local storage from myLibraryArray and re-convert it into new object
 const storedArray = () => JSON.parse(localStorage.getItem('array'));
-
-if (storedArray()) {
-  let myLibraryArray = (storedArray() || []).map((obj) => {
-    return new Book(obj.title, obj.author, obj.pages, obj.read);
-  });
-}
-
+let myLibraryArray = (storedArray() || []).map((obj) => {
+  return new Book(obj.title, obj.author, obj.pages, obj.read);
+});
 const saveToLocalStorage = () => {
   localStorage.setItem('array', JSON.stringify(myLibraryArray));
 };
