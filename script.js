@@ -2,7 +2,6 @@
 //create Book objects using ES6 class syntax
 class Book {
   constructor(title, author, pages, read) {
-    const self = this;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -18,9 +17,13 @@ class Book {
 
 //get local storage from myLibraryArray and re-convert it into new object
 const storedArray = () => JSON.parse(localStorage.getItem('array'));
-let myLibraryArray = (storedArray() || []).map((obj) => {
-  return new Book(obj.title, obj.author, obj.pages, obj.read);
-});
+
+if (storedArray()) {
+  let myLibraryArray = (storedArray() || []).map((obj) => {
+    return new Book(obj.title, obj.author, obj.pages, obj.read);
+  });
+}
+
 const saveToLocalStorage = () => {
   localStorage.setItem('array', JSON.stringify(myLibraryArray));
 };
