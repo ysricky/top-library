@@ -2,6 +2,7 @@
 //create Book objects using ES6 class syntax
 class Book {
   constructor(title, author, pages, read) {
+    const self = this;
     this.title = title;
     this.author = author;
     this.pages = pages;
