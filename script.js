@@ -9,7 +9,7 @@ class Book {
   }
   info() {
     let hasRead = this.read ? 'has been read' : 'not read yet';
-    return `${this.title.toUppercase()}, by ${this.author}, ${
+    return `${this.title.toUpperCase()}, by ${this.author}, ${
       this.pages
     } pages, ${hasRead}.`;
   }
